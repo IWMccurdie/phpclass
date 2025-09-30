@@ -5,9 +5,9 @@ $secPerDay = 24 * $secPerHour;
 $secPerYear = 365 * $secPerDay;
 
 $now = time();
-$burningMan = mktime(12, 0,0, 8,5,2033);
+$endOfSemester = mktime(21, 30,0, 12,16,2025);
 
-$seconds = $burningMan - $now;
+$seconds = $endOfSemester - $now;
 
 $years = floor($seconds/$secPerYear);
 $seconds = $seconds - ($years * $secPerYear);
@@ -19,6 +19,7 @@ $hours = floor($seconds / $secPerHour);
 $seconds = $seconds - ($hours * $secPerHour);
 
 $minutes = floor($seconds / $secPerMin);
+$seconds = $seconds - ($minutes * $secPerMin)
 
 ?><!doctype html>
 <html lang="en">
@@ -41,12 +42,8 @@ include "../includes/header.php"
     ?>
 
     <main id="mainContent">
-        <h3>Countdown To Burning Man</h3>
-        <span>Years: <?=$years?></span>
-        <span>Days: <?=$days?></span>
-        <span>Hours: <?=$hours?></span>
-        <span>Minutes: <?=$minutes?></span>
-        <span>Seconds: <?=$seconds?></span>
+        <h3>End of semester timer</h3>
+        <span>Years: <?=$years?> | Days: <?=$days?> | Hours: <?=$hours?> | Minutes: <?=$minutes?> | Seconds: <?=$seconds?></span>
     </main>
 </div>
 
