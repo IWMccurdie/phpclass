@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Ian's Website</title>
     <link rel="stylesheet" href="css/base.css">
 </head>
 <body>
@@ -19,7 +19,8 @@
     ?>
 
     <main id="mainContent">
-        <p>Content goes here</p>
+        <img src="Images/IanPhoto.jpg" alt="A picture of me and my fiancee"/>
+        <p>My name is Ian McCurdie, and I am currently enrolled in the software development program at FVTC. I enjoy playing video games, reading books and hanging out with friends and family.</p>
     </main>
 </div>
 
