@@ -19,7 +19,7 @@
     ?>
 
     <main id="mainContent">
-        <img src="Images/IanPhoto.jpg" alt="A picture of me and my fiancee"/>
+        <img src="Images/IanPhoto.jpg" alt="A picture of me and my fiancee" class="homepageImage">
         <p>My name is Ian McCurdie, and I am currently enrolled in the software development program at FVTC. I enjoy playing video games, reading books and hanging out with friends and family.</p>
     </main>
 </div>

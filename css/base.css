@@ -78,7 +78,7 @@ a {
     text-decoration: none;
     color: black;
 }
-img {
+.homepageImage {
     display: block;
     margin: auto;
 }
@@ -86,4 +86,8 @@ p {
     text-align: center;
     width: 500px;
     margin: auto;
+}
+h1
+{
+    padding: 15px;
 }
