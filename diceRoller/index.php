@@ -52,12 +52,12 @@ include "../includes/header.php"
     <main id="mainContent">
        <h1>Dice Rolling Game</h1>
         <h3>Your score is <?=$playerScore?></h3>
-        <img src= "<?=$diceImages[$diceRoll1]?>" class="diceImages">
-        <img src="<?=$diceImages[$diceRoll2]?>" class="diceImages">
+        <img src= "<?=$diceImages[$diceRoll1]?>" class="diceImages" alt="Players first die">
+        <img src="<?=$diceImages[$diceRoll2]?>" class="diceImages" alt="Players second die">
         <h3>Computer Score is <?=$computerScore?></h3>
-        <img src="<?=$diceImages[$diceRoll3]?>" class="diceImages">
-        <img src="<?=$diceImages[$diceRoll4]?>" class="diceImages">
-        <img src="<?=$diceImages[$diceRoll5]?>" class="diceImages">
+        <img src="<?=$diceImages[$diceRoll3]?>" class="diceImages" alt="Computer first die">
+        <img src="<?=$diceImages[$diceRoll4]?>" class="diceImages" alt="Computer second die">
+        <img src="<?=$diceImages[$diceRoll5]?>" class="diceImages" alt="Computer third die">
         <h3><?=$winnerMessage?></h3>
     </main>
 </div>
