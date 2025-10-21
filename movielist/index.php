@@ -12,6 +12,12 @@
             table-layout: fixed;
             width: 90%;
         }
+        table a {
+            color: darkblue;
+        }
+        table a:hover{
+            text-decoration: underline;
+        }
     </style>
     <link rel="stylesheet" href="/css/base.css">
 </head>
@@ -49,7 +55,9 @@ include "../includes/header.php"
 
                     echo "<tr>";
                     echo "<td>$movieID</td>";
-                    echo "<td>$movieTitle</td>";
+                    echo "    <td>";
+                    echo " <a href=\"movie.php?id=$movieID\">$movieTitle</a>";
+                    echo "    </td>";
                     echo "<td>$movieRating</td>";
                     echo "</tr>";
                 }

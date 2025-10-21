@@ -1,0 +1,39 @@
+.grid-header { grid-area: grid-header; }
+
+.username { grid-area: username; }
+.password { grid-area: password; }
+.email { grid-area: email; }
+.role { grid-area: role; }
+
+.username-input { grid-area: username-input; }
+.password-input { grid-area: password-input }
+.email-input { grid-area: email-input; }
+.role-input { grid-area: role-input; }
+
+.error-message {grid-area: error-message; }
+.grid-footer { grid-area: grid-footer; }
+
+.grid-container{
+    display: grid;
+    border: 1px solid black;
+}
+
+.grid-container > div {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.grid-container input[type="text"],
+.grid-container input[type="password"] {
+    width: 98%;
+    margin: 2px 0;
+}
+
+.error p
+{
+    color: red;
+}
+
+.hidden{
+    display: none;
+}
