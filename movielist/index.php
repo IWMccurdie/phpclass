@@ -67,11 +67,6 @@ include "../includes/header.php"
             }
             ?>
 
-            <tr>
-                <td>45</td>
-                <td>Tron</td>
-                <td>PG-13</td>
-            </tr>
         </table>
         <a href="addmovie.php">Add a movie</a>
     </main>
