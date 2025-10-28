@@ -1,43 +1,53 @@
 <?php
 
+
+    //echo $guid;
+    //echo md5("password123");
+    //exit();
     session_start();
 
 $errorMessage = "";
 
-$txtUsername = $_POST["txtUsername"];
+$txtEmail = $_POST["txtEmail"];
 $txtPassword = $_POST["txtPassword"];
+$formSubmitted = isset($_POST['hidden']);
 
-include "../includes/db.php";
-$con = getDBConnection();
+if ($formSubmitted) {
+    include "../includes/db.php";
+    $con = getDBConnection();
 
-try {
+    try {
+        $query = "SELECT * FROM members WHERE memberEmail = ?";
+        $stmt = mysqli_prepare($con, $query);
+        mysqli_stmt_bind_param($stmt, "s", $txtEmail);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_array($result);
 
-    $query = "SELECT * FROM members WHERE memberName = ? AND memberPassword = ?";
-    $stmt = mysqli_prepare($con, $query);
-    mysqli_stmt_bind_param($stmt, "ss", $txtUsername, $txtPassword);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
+        if ($row != null) {
+            $hashedPassword = $row["memberPassword"];
+            $memberKey = $row["memberKey"];
 
-    $row = mysqli_fetch_array($result);
-    var_dump($row);
+            if (md5($txtPassword . $memberKey) == $hashedPassword) {//passwords matched
+                $_SESSION["memberID"] = $row["memberID"];
+                $_SESSION["roleID"] = $row["roleID"];
 
-    $_SESSION["userID"] = $row["memberID"];
-    $_SESSION["roleID"] = $row["roleID"];
+                if ($row["roleID"] == 3) {
+                    header("Location: admin.php");
+                } else if ($row["roleID"] == 1) {
+                    header("Location: member.php");
+                }
+            } else {
+                $errorMessage = "Email or password was incorrect.";
+            }
+        } else {
+            $errorMessage = "Email or password was incorrect.";
+        }
 
-    if ($row["roleID"] == 3) {
-        header("Location: admin.php");
+    } catch (mysqli_sql_exception $ex) {
+        //echo $ex;
+        $errorMessage = $ex;
     }
-    else if ($row["roleID"] == 1) {
-        header("Location: member.php");
-    }
-    else
-    {
-        $errorMessage = "There was an error.";
-    }
-
-}catch (mysqli_sql_exception $ex) {
-    //echo $ex;
-    $errorMessage = $ex;
 }
 
 
@@ -58,7 +68,7 @@ try {
         .grid-container{
             grid-template-areas:
                 "grid-header grid-header"
-                "username username-input"
+                "email email-input"
                 "password password-input"
                 "error-message error-message"
                 "grid-footer grid-footer"
@@ -84,12 +94,12 @@ include "../includes/header.php"
                     <h3>Member Login</h3>
                 </div>
 
-                <div class="username">
-                    <label for="txtUsername">Username</label>
+                <div class="email">
+                    <label for="txtEmail">Email</label>
                 </div>
 
-                <div class="username-input">
-                    <input type="text" name="txtUsername" id="txtUsername"  value ="<?=$txtUsername?>">
+                <div class="email-input">
+                    <input type="text" name="txtEmail" id="txtEmail"  value ="<?=$txtEmail?>">
                 </div>
                 <div class="password">
                     <label for="txtPassword">Password</label>
@@ -104,6 +114,7 @@ include "../includes/header.php"
                 </div>
 
                 <div class="grid-footer">
+                    <input type="hidden" value="hidden" name="hidden" id="hidden">
                     <input type="submit" value="Login">
                 </div>
 

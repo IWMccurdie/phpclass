@@ -68,7 +68,7 @@ include "../includes/header.php"
                     $password = $row['Password'];
 
                     echo "<tr>";
-                    echo "<td>$customerID</td>";
+                    echo "<td><a href='updateCustomer.php?id=$customerID'>$customerID</a></td>";
                     echo "<td>$firstName</td>";
                     echo "<td>$lastName</td>";
                     echo "<td>$address</td>";
