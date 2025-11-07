@@ -14,7 +14,7 @@ $txtPassword2 = $_POST["txtPassword"];
 $cboRole = $_POST["cboRole"];
 
 $ADMIN_ID = 3;
-if (!isset($_SESSION["userID"]) || $_SESSION["roleID"] != $ADMIN_ID) {
+if (!isset($_SESSION["memberID"]) || $_SESSION["roleID"] != $ADMIN_ID) {
     header("Location: /login");
 }
 
@@ -100,7 +100,7 @@ include "../includes/header.php"
                 </div>
 
                 <div class="username-input">
-                    <input type="text" name="txtUsername" id="txtUsername"  value ="<?=$txtUsername?>">
+                    <input type="text" name="txtUsername" id="txtUsername" minlength="4"  value ="<?=$txtUsername?>">
                 </div>
 
                 <div class="email">
@@ -108,14 +108,14 @@ include "../includes/header.php"
                 </div>
 
                 <div class="email-input">
-                    <input type="text" name="txtEmail" id="txtEmail"  value ="<?=$txtEmail?>">
+                    <input type="Email" name="txtEmail" id="txtEmail"  value ="<?=$txtEmail?>">
                 </div>
 
                 <div class="password">
                     <label for="txtPassword">Password</label>
                 </div>
                 <div class="password-input">
-                    <input type="password" name="txtPassword" id="txtPassword" value ="<?=$txtPassword?>">
+                    <input type="password" name="txtPassword" id="txtPassword" minlength="4" value ="<?=$txtPassword?>">
                 </div>
 
                 <div class="password2">
@@ -130,16 +130,39 @@ include "../includes/header.php"
                 </div>
 
                 <div class="role-input">
-                    <select name="cboRole" id="cboRole">
-                        <option value="1">Member</option>
-                        <option value="2">Operator</option>
-                        <option value="3">Admin</option>
-                    </select>
+
+                    <?php
+
+                        try{
+                            include "../includes/db.php";
+                            $con = getDBConnection();
+                            $rs = mysqli_query($con,"Select * from roles");
+
+                            echo "<select name='cboRole' id='cboRole'>";
+
+                            while($row = mysqli_fetch_array($rs)){
+
+                                $roleID = $row['roleID'];
+                                $roleName = $row['roleName'];
+
+                                echo "<option value='$roleID'>$roleName</option>";
+                            }
+
+                            echo "</select>";
+                        }
+                        catch (mysqli_sql_exception $ex){
+                            echo $ex;
+                        }
+                    ?>
                 </div>
+
+
 
                 <div class="error <?php echo $errorMessage == "" ? "hidden" : ""; ?>">
                     <p><?=$errorMessage?></p>
                 </div>
+
+
 
                 <div class="grid-footer">
                     <input type="hidden" value="hidden" name="hidden" id="hidden">
