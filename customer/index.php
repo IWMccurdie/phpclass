@@ -66,7 +66,6 @@ include "../includes/header.php"
                     $phone = $row['Phone'];
                     $email = $row['Email'];
                     $password = $row['Password'];
-                    $memberKey = $row['MemberKey'];
 
 
                     echo "<tr>";
@@ -80,7 +79,6 @@ include "../includes/header.php"
                     echo "<td>$phone</td>";
                     echo "<td>$email</td>";
                     echo "<td>$password</td>";
-                    echo "<td>$memberKey</td>";
                     echo "</tr>";
                 }
             }

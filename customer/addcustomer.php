@@ -33,9 +33,9 @@ $memberKey = sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), 
             try {
                 $hashedPassword = md5($txtPassword . $memberKey);
 
-                $query = "INSERT INTO customers (FirstName, LastName, Address, City, State, Zip, Phone, Email, Password, MemberKey ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? );";
+                $query = "INSERT INTO customers (FirstName, LastName, Address, City, State, Zip, Phone, Email, Password ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );";
                 $stmt = mysqli_prepare($con, $query);
-                mysqli_stmt_bind_param($stmt, "sssssissss", $txtFirst, $txtLast, $txtAddress, $txtCity, $txtState, $txtZip, $txtPhone, $txtEmail, $hashedPassword, $memberKey );
+                mysqli_stmt_bind_param($stmt, "sssssisss", $txtFirst, $txtLast, $txtAddress, $txtCity, $txtState, $txtZip, $txtPhone, $txtEmail, $hashedPassword );
                 mysqli_stmt_execute($stmt);
 
                 header("Location: /customer");
