@@ -66,6 +66,8 @@ include "../includes/header.php"
                     $phone = $row['Phone'];
                     $email = $row['Email'];
                     $password = $row['Password'];
+                    $memberKey = $row['MemberKey'];
+
 
                     echo "<tr>";
                     echo "<td><a href='updateCustomer.php?id=$customerID'>$customerID</a></td>";
@@ -77,7 +79,8 @@ include "../includes/header.php"
                     echo "<td>$zip</td>";
                     echo "<td>$phone</td>";
                     echo "<td>$email</td>";
-                    echo "<td>**********</td>";
+                    echo "<td>$password</td>";
+                    echo "<td>$memberKey</td>";
                     echo "</tr>";
                 }
             }
