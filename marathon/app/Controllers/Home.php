@@ -14,9 +14,6 @@ class Home extends BaseController
 
     public function login(): string
     {
-
-        echo "here";
-        exit();
         helper('form');
 
         $rules = [
@@ -40,7 +37,9 @@ class Home extends BaseController
         $Member = new Member();
         if ($Member->user_login($username, $password))
         {
-            return view('admin_page');
+            //return view('admin_page');
+            header('Location: admin');
+            exit();
         }
         else {
             $data = [
