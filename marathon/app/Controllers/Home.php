@@ -23,7 +23,6 @@ class Home extends BaseController
 
         if (!$this->validate($rules))
         {
-
             $data = [
                 "load_error" => "true",
             ];
@@ -52,6 +51,46 @@ class Home extends BaseController
 
     public function create(): string
     {
+
+        helper('form');
+
+        $rules = [
+            "username" => "required",
+            "email" => "required|valid_email",
+            "password" => "required",
+            "retypePassword" => "required"
+
+        ];
+
+        if (!$this->validate($rules))
+        {
+            $data = [
+                "load_error" => "true",
+            ];
+            return view('homepage', $data);
+        }
+
+        $memberName = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+
+        $retypePassword = $this->request->getPost('retypePassword');
+
+
+        $Member = new Member();
+        if ($Member->add_user($memberName, $memberEmail, $password))
+        {
+            //return view('admin_page');
+            header('Location: admin');
+            exit();
+        }
+        else {
+            $data = [
+                "load_error" => "true",
+                "error_message" => "Invalid Username or Password."
+            ];
+            return view('homepage', $data);
+        }
+
         echo "create";
         exit();
         return view('homepage');

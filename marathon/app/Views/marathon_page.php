@@ -65,18 +65,41 @@
                             <thead>
                             <tr>
                                 <th>Race Name</th>
+                                <th>Description</th>
                                 <th>Location</th>
                                 <th>Date</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Haunted 5k</td>
-                                <td>Appleton</td>
-                                <td>October 31st</td>
-                                <td>Edit|Delete</td>
-                            </tr>
+
+
+                            <?php
+                            /** @var ARRAY $races */
+                            foreach ($races as $race) {
+
+                                $id = $race['raceID'];
+                                $name = $race['raceName'];
+                                $location = $race['raceLocation'];
+                                $description = $race['raceDescription'];
+                                $dateTime = strtotime($race['raceDateTime']);
+                                $formatted = date('m/d/Y h:i', $dateTime);
+
+                                echo "<tr>";
+                                echo "<td>$name</td>";
+                                echo "<td>$description</td>";
+                                echo "<td>$location</td>";
+                                echo "<td>$dateTime</td>";
+                                echo "<td>";
+                                echo "<a href=\"/marathon/public/update_race/$id\">Edit</a>";
+                                echo "|";
+                                echo "<a href=\"/marathon/public/delete_race/$id\">Delete</a>";
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
+
+
                             </tbody>
                         </table>
                     </div>
