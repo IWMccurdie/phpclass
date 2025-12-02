@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->post('/login', 'Home::login');
+$routes->get("/logout", 'Home::logout');
 $routes->post('/create', 'Home::create');
 
 //admin routes

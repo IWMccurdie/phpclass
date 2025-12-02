@@ -58,35 +58,64 @@ class Admin extends BaseController
 
     public function update_race($id)
     {
-        $Race = new Race();
+        $this->session = service('session');
+        $this->session->start();
+        $memberKey = $this->session->get('memberKey');
 
-        $data = [
-            'manage_marathon' => 'true',
-            'race' => $Race->get_race($id)
-        ];
-        return view('update_page', $data);
+        $Member = new Member();
+        if($Member->has_access($memberKey, $id)) {
+            $Race = new Race();
+
+            $data = [
+                'manage_marathon' => 'true',
+                'race' => $Race->get_race($id)
+            ];
+            return view('update_page', $data);
+        }
+        echo "No Access";
+        exit();
+
+
     }
 
     public function edit_race()
     {
-        $Race = new Race();
-
+        $this->session = service('session');
+        $this->session->start();
+        $memberKey = $this->session->get('memberKey');
         $id = $this->request->getPost('race_id');
         $name = $this->request->getPost('race_name');
         $description = $this->request->getPost('race_description');
         $location = $this->request->getPost('race_location');
         $dateTime = $this->request->getPost('race_datetime');
 
-        $Race->update_race( $id, $name, $description, $location, $dateTime );
-        header('Location: /marathon/public/marathon');
+        $Member = new Member();
+        if($Member->has_access($memberKey, $id)) {
+            $Race = new Race();
+            $Member = new Member();
+
+            $Race->update_race($id, $name, $description, $location, $dateTime);
+            header('Location: /marathon/public/marathon');
+            exit();
+        }
+        echo "No Access";
         exit();
     }
 
     public function delete_race($id)
     {
-        $Race = new Race();
-        $Race->delete_race($id);
-        header('Location: /marathon/public/marathon');
+        $this->session = service('session');
+        $this->session->start();
+        $memberKey = $this->session->get('memberKey');
+
+        $Member = new Member();
+        if($Member->has_access($memberKey, $id)) {
+            $Race = new Race();
+            $Race->delete_race($id);
+            header('Location: /marathon/public/marathon');
+            exit();
+        }
+        echo "No Access";
         exit();
     }
 }

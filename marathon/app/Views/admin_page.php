@@ -1,15 +1,4 @@
-<?php
-    $this->session = service('session');
-    $this->session->start();
-
-    $roleID = $this->session->get('roleID');
-    if ($roleID != 3)
-    {
-        header('Location: /marathon/public#login');
-        exit();
-    }
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
