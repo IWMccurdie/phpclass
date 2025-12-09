@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Race;
+use Exception;
 
 class Admin extends BaseController
 {
@@ -14,11 +15,14 @@ class Admin extends BaseController
 
     public function manage_marathon(): string
     {
+        $this->session = service("session");
+        $this->session->start();
+        $memberKey = $this->session->get('memberKey');
         $Race = new Race();
 
         $data = [
             'manage_marathon' => 'true',
-            'races' => $Race->get_races()
+            'races' => $Race->get_races($memberKey)
         ];
         return view('marathon_page', $data);
     }
@@ -118,4 +122,5 @@ class Admin extends BaseController
         echo "No Access";
         exit();
     }
+
 }
